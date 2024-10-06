@@ -17,11 +17,11 @@ public class poo{
         frame.setLayout(new GridLayout(4, 2));
 
         // Criando o componente e campos
-        JLabel nameLabel = new JLabel("Name:");
+        JLabel nameLabel = new JLabel("Nome:");
         JTextField nameField = new JTextField();
-        JLabel ageLabel = new JLabel("Age:");
-        JTextField ageField = new JTextField();
-        JLabel cityLabel = new JLabel("City:");
+        JLabel entradasaidaLabel = new JLabel("Data (dd/MM/yyyy):");
+        JTextField entradasaidaField = new JTextField();
+        JLabel cityLabel = new JLabel("Token:");
         JTextField cityField = new JTextField();
 
         // Botão
@@ -30,8 +30,8 @@ public class poo{
         // Componentes para preenchimento
         frame.add(nameLabel);
         frame.add(nameField);
-        frame.add(ageLabel);
-        frame.add(ageField);
+        frame.add(entradasaidaLabel);
+        frame.add(entradasaidaField);
         frame.add(cityLabel);
         frame.add(cityField);
         frame.add(new JLabel());  // Campo vazio pra espaçamento
