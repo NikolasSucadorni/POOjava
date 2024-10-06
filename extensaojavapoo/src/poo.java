@@ -21,8 +21,8 @@ public class poo{
         JTextField nameField = new JTextField();
         JLabel entradasaidaLabel = new JLabel("Data (dd/MM/yyyy):");
         JTextField entradasaidaField = new JTextField();
-        JLabel cityLabel = new JLabel("Token:");
-        JTextField cityField = new JTextField();
+        JLabel tokenLabel = new JLabel("Token:");
+        JTextField tokenField = new JTextField();
 
         // Botão
         JButton saveButton = new JButton("Save");
@@ -32,8 +32,8 @@ public class poo{
         frame.add(nameField);
         frame.add(entradasaidaLabel);
         frame.add(entradasaidaField);
-        frame.add(cityLabel);
-        frame.add(cityField);
+        frame.add(tokenLabel);
+        frame.add(tokenField);
         frame.add(new JLabel());  // Campo vazio pra espaçamento
         frame.add(saveButton);
 
@@ -43,8 +43,8 @@ public class poo{
             public void actionPerformed(ActionEvent e) {
                 // Pegando valores dos dados de texto
                 String name = nameField.getText();
-                String age = ageField.getText();
-                String city = cityField.getText();
+                String age = entradasaidaField.getText();
+                String city = tokenField.getText();
 
                 // Validação simples
                 if (name.isEmpty() || age.isEmpty() || city.isEmpty()) {
