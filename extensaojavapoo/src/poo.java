@@ -7,10 +7,10 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class DataEntryAppDatabase {
+public class poo{
 
     public static void main(String[] args) {
-        //Criando o frame
+        // Criando o frame
         JFrame frame = new JFrame("Data Entry");
         frame.setSize(300, 200);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -46,28 +46,38 @@ public class DataEntryAppDatabase {
                 String age = ageField.getText();
                 String city = cityField.getText();
 
-                // INSERT no SQL
-                try (Connection connection = DriverManager.getConnection("jdbc:sqlite:mydatabase.db")) {
-                    String sql = "INSERT INTO users (name, age, city) VALUES (?, ?, ?)";
-                    try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
-                        pstmt.setString(1, name);
-                        pstmt.setInt(2, Integer.parseInt(age));
-                        pstmt.setString(3, city);
-                        pstmt.executeUpdate();
-                        JOptionPane.showMessageDialog(frame, "Data saved successfully!");
+                // Validação simples
+                if (name.isEmpty() || age.isEmpty() || city.isEmpty()) {
+                    JOptionPane.showMessageDialog(frame, "All fields must be filled");
+                    return;
+                }
+
+                try {
+                    int ageValue = Integer.parseInt(age); // Validação do campo age
+                    
+                    // INSERT no SQL
+                    try (Connection connection = DriverManager.getConnection("jdbc:sqlite:mydatabase.db")) {
+                        String sql = "INSERT INTO users (name, age, city) VALUES (?, ?, ?)";
+                        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+                            pstmt.setString(1, name);
+                            pstmt.setInt(2, ageValue);
+                            pstmt.setString(3, city);
+                            pstmt.executeUpdate();
+                            JOptionPane.showMessageDialog(frame, "Data saved successfully!");
+                        }
+                    } catch (SQLException ex) {
+                        JOptionPane.showMessageDialog(frame, "Error saving data: " + ex.getMessage());
                     }
-                } catch (SQLException ex) {
-                    JOptionPane.showMessageDialog(frame, "Error saving data: " + ex.getMessage());
+
                 } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(frame, "Invalid age format");
+                    JOptionPane.showMessageDialog(frame, "Invalid age format, please enter a number");
                 }
             }
         });
 
-        // Set the frame visibility
         frame.setVisible(true);
 
-        // iniciando database
+        // Iniciando o banco de dados
         try (Connection connection = DriverManager.getConnection("jdbc:sqlite:mydatabase.db")) {
             String sql = "CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, age INTEGER, city TEXT)";
             try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
